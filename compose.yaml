@@ -1,0 +1,48 @@
+services:
+###> shopware/core ###
+  database:
+    image: mariadb:11.8
+    environment:
+      MARIADB_DATABASE: shopware
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_USER: shopware
+      MARIADB_PASSWORD: shopware
+    volumes:
+      - db-data:/var/lib/mysql:rw
+    healthcheck:
+      test: [ "CMD", "mariadb-admin" ,"ping", "-h", "localhost", "-proot" ]
+      start_period: 10s
+      start_interval: 3s
+      interval: 5s
+      timeout: 1s
+      retries: 10
+###< shopware/core ###
+
+###> shopware/docker-dev ###
+  web:
+    image: ghcr.io/shopware/docker-dev:php8.3-node22-caddy
+    ports:
+      - 8000:8000
+      - 8080:8080
+      - 9999:9999
+      - 9998:9998
+      - 5173:5173
+      - 5773:5773
+    environment:
+      APP_ENV: ${APP_ENV-dev}
+      HOST: 0.0.0.0
+      APP_URL: http://localhost:8000
+      DATABASE_URL: mysql://root:root@database/shopware
+      MAILER_DSN: smtp://mailer:1025
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      database:
+        condition: service_healthy
+###< shopware/docker-dev ###
+
+volumes:
+###> shopware/core ###
+  db-data:
+###< shopware/core ###
+

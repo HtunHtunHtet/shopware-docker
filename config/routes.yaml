@@ -1,0 +1,11 @@
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute
+
+storefront_controllers:
+    resource:
+        path: ../src/Storefront/Controller/
+        namespace: App\Storefront\Controller
+    type: attribute
