@@ -1,0 +1,31 @@
+{
+  "name": "swag/basic-example",
+  "description": "Description for the plugin SwagBasicExample",
+  "version": "1.0.0",
+  "type": "shopware-platform-plugin",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Shopware"
+    }
+  ],
+  "require": {
+    "shopware/core": "~6.7.0"
+  },
+  "extra": {
+    "shopware-plugin-class": "SwagBasicExample\\SwagBasicExample",
+    "label": {
+      "de-DE": "Der angezeigte lesbare Name für das Plugin",
+      "en-GB": "The displayed readable name for the plugin"
+    },
+    "description": {
+      "de-DE": "Beschreibung in der Administration für das Plugin",
+      "en-GB": "Description in the Administration for this plugin"
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "SwagBasicExample\\": "src/"
+    }
+  }
+}
